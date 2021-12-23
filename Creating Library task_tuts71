@@ -1,0 +1,114 @@
+#Author- Abdul Bari KHAN
+#5/12/2021
+#create a library class
+# and define methods to
+# 1.display all books (display-book)
+# 3.a person donate a book(add_book)
+# 2.customer lend a book (lend_book)
+#4.customer return a book (return_book)
+
+#constructors take HarryLibrary=Library(listofbooks(list),library_name)
+#dictionary(key-customer,value-name of book) maintain to who lend which book
+#if book not awailable then print who lend this book from library
+
+#create a main function and run an infinite while loop asking user for their input (display,add,lend,return)
+
+dict1={0:0}
+
+class Library:
+    def __init__(self,listofbooks,library_name):
+        self.listofbooks=listofbooks
+        self.initial_book=listofbooks           #used for other calculatios
+        self.library_name=library_name
+    def display_books(self):
+        return self.listofbooks
+
+    def lend_book(self):
+        print(f"{self.listofbooks}\nenter a book name you want to lend-")
+        lendbook=input()
+
+
+        for key in dict1.keys():
+            if key.__str__()==lendbook.__str__():
+                print(f"book is own by {dict1[key]}")
+        for i in self.listofbooks:
+            if i==lendbook:
+                dict1[lendbook] = name
+                #print(dict1)
+                self.listofbooks.remove(lendbook)
+
+    def return_book(self):
+        print("books take by you-")
+#        print(dict1.values())
+#        print(dict1.keys())
+
+        list_key = list(dict1.keys())
+        list_value = list(dict1.values())
+        for z in range(10):
+            for i in list_value:
+                if i == name.__str__():
+                    position = list_value.index(i)
+                    x = list_key[position]
+                    print(x,end=" ")
+                    #print(dict1)
+                    list_value.remove(i)
+                    list_key.remove(x)
+                    #print(list_key)
+                    #print(list_value)
+        list_key1=list(dict1.keys())
+        list_value1=list(dict1.values())
+        for j in list_value1:
+            if j==name.__str__():
+                print(f"\nenter book name you want to return")
+                returnbook = input()
+                del dict1[returnbook]
+                #print(dict1)
+                self.listofbooks.append(returnbook)
+                break
+
+
+    def donate_book(self):
+        print(f"enter book name you donated to {self.library_name}")
+        donatebook=input()
+        self.listofbooks.append(donatebook)
+
+
+harry_library=Library(["c++","java","python","django"],"harry_library")
+
+while(True):
+
+    print("Enter your name")
+    name = input()
+    print("Enter 1/2/3/4")
+    print("1-Display books available\n2-customer to lend book\n3-customer to return book\n4-person to donate book or add book")
+    a = input()
+    try:
+        if int(a) == 1:
+            print(harry_library.display_books())
+            print("Enter 2/3/4")
+            print("2-customer to lend book\n3-customer to return book\n4-person to donate book or add book")
+            a = input()
+            if int(a) == 2:
+                harry_library.lend_book()
+                print(harry_library.display_books())
+            elif int(a) == 3:
+                harry_library.return_book()
+                print(harry_library.display_books())
+            elif int(a) == 4:
+                harry_library.donate_book()
+                print(harry_library.display_books())
+            else:
+                print("enter valid key")
+        elif int(a) == 2:
+            harry_library.lend_book()
+            print("currently available books in library are- ", harry_library.display_books())
+        elif int(a) == 3:
+            harry_library.return_book()
+            print("currently available books in library are- ", harry_library.display_books())
+        elif int(a) == 4:
+            harry_library.donate_book()
+            print("currently available books are in library are - ", harry_library.display_books())
+        else:
+            print("enter valid key")
+    except Exception as alph1:
+        print(alph1," is error enter valid key")
