@@ -1,0 +1,66 @@
+#Author- Abdul Bari KHAN
+#22/12/2021
+#Medium Problem 7- Search Engine
+"""
+You are given few sentences as a list (Python list of sentences).
+Take a query string as an input from the user.
+You have to pull out the sentences matching this query inputted by the user
+in decreasing order of relevance after converting every word in the query and the sentence to lowercase.
+The most relevant sentence is the one with the maximum number of matching words with the query.
+
+Sentences = [“Python is cool”, “python is good”, “python is not python snake”]
+"""
+
+sentences = ['python is cool', 'python is good', 'python is not python snake']
+
+list_sentences=[]               #all item stored in list of list(by spaces)
+for item in sentences:
+    items=item.split(" ")
+    list_sentences.append(items)
+#print(list_sentences)
+
+query=input("\nPlease input your query string\n")           #search keyword taking from user
+list_query=query.split(" ")                                 #and stored into a list
+#print(list_query)
+
+
+dict1={}                                #matching user keywords into our sentences and stored into a dictionary
+for i in range(len(sentences)):         #as {'sentence' : 'no. of match found'}
+    match=0
+    for item1 in list_sentences[i]:     #item1=[python,is,cool] (1st sentence) at loop start
+        for item2 in list_query:        #item2=[python]   (1st keyword of user)      at loop start
+            if item1==item2.lower():        #.lower are useed to change word into lowercase
+                match+=1                    #agr koi word match hua item1 ka to match is inc by 1.
+    dict1[sentences[i]]=match
+#print(dict1)                        #dictionary is showing how much number(match) of matches find in each sentences
+
+
+list_values=list(dict1.values())
+list_keys=list(dict1.keys())
+
+
+list_values1=list(dict1.values())       #list_values1 are used to get output result first which matches more keyword
+list_values1.sort(reverse=True)
+
+list_result=[]                   # all matched result stored in decreasing  order of result matches sentence
+for i in range(len(list_values)):
+    position=list_values.index(list_values1[0])
+
+    if list_values1[0]>0:               #if no matched then not stored in the list
+        list_result.append(list_keys[position])
+
+    #print(list_keys[position])
+    list_values1.pop(0)           #after stored in list_result deleting lists so that no duplicate(dubara) result found.
+    list_values.pop(position)
+    list_keys.pop(position)
+
+serial_no=1
+print(f"\n{len(list_result)} results found:")
+for item in list_result:                #printing all result matched
+    print(f"({serial_no}). {item}")
+    serial_no+=1
+
+a=[1,2,"khan"]
+b=[1,2,"khan"]
+
+print(a==b)
