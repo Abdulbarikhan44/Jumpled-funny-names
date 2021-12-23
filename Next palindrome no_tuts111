@@ -1,0 +1,44 @@
+#Author- Abdul Bari KHAN
+#20/12/2021
+#Easy Problem 5- The Next palindrome
+#palindrme nubers are=jisko utla krne pr wahi no. ban jaye; 121,1551,45854,mom,tenet etc.
+#take a no. as an input and find next palindrome corresponding to that number(if no. greater than 10)
+#input: take n0. number(test cases) of palindome numbers user want to knew, take all numbers (no.1,no.2,....)
+#output:  next palindome for no.1 is= ----,  etc.
+
+
+n=int(input("Enter No. of Test cases-"))
+
+lista=[]            #all input are taken into list as a string
+for i in range(n):
+    lista.append(input(f"Input {i+1} number  you want to check it is palindrome or not-"))
+print(lista)
+print("")
+z=0
+listb=[]
+for item in lista:
+    if int(item)>10:
+        while (True):
+            x = 0
+            for i in range(len(item) // 2):
+                if item[i] == item[len(item) - 1 - i]:
+                    x += 1  # if palindrome then x increses by half of length (integer) of number
+            if x == len(item) // 2:  # then this case true and palindrome print
+                #print(f"({z + 1}). Next palindrome for {lista[z]} is {item}.")
+                listb.append(item)
+                z += 1  # z are used to print initial input enters by user.
+                break  # while loop stop here, for loop goes to next item of lista
+            else:
+                # print(f"{item} is not palindrome")  # if not palindrome then x is not increses by half of length of no.
+                try:
+                    item1 = int(item) + 1  # then no. is increasing by 1; with help of  first change to integer
+                    item = item1.__str__()  # after incrising then integer change into string
+                    continue  # while loop phir se restart with modifies item
+                except Exception as e1:  # try except ka use kiya hai because input word bhi ho sakta hai
+                    #print(f"({z + 1}). '{lista[z]}' is not a number")
+                    listb.append(lista[z])
+                    z += 1
+                    break
+    else:
+        listb.append(item)
+print(listb)
