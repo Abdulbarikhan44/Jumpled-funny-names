@@ -1,0 +1,47 @@
+#Author- Abdul Bari KHAN
+#14/12/2021
+#akbaar padhke sunao
+
+#my API key from newsapi.org=071c9de631d342589f8b26f947777140
+
+def speak1(str):
+    from win32com.client import Dispatch
+    speak=Dispatch("SAPI.SpVoice")
+    speak.speak(str)
+if __name__ == '__main__':
+    #speak1(f"Todays top 10 news headlines are")
+
+    import time
+    time.sleep(1)
+
+    import requests
+    import json
+
+    url1 = "https://newsapi.org/v2/top-headlines?country=in&apiKey=071c9de631d342589f8b26f947777140"
+    #url1 = "https://newsapi.org/v2/top-headlines?sources=the-hindu&apiKey=071c9de631d342589f8b26f947777140"
+    """
+    #for top 10 news from a channel=https://newsapi.org/v2/top-headlines?sources=the-hindu&apiKey=071c9de631d342589f8b26f947777140
+    #for other channel news use sources=the-times-of india instead of sources=the-hindu
+    #channels-name= the-hindu,techcrunch,the-times-of-india,abc-news,al-jazeera-english,etc
+    """
+    """
+    for india news=https://newsapi.org/v2/top-headlines?country=in&apiKey=071c9de631d342589f8b26f947777140
+    for us news-use country=us instead of country=in
+    """
+
+    r = requests.get(url=url1)
+    #print(type(r))
+    #change_dict = r.json()    #r.json() changes the responses(if respose is json data) into dictionary.
+    change_dict=json.loads(r.text)
+    all_articals = change_dict["articles"]
+
+    range1 = change_dict["totalResults"]
+    print(f"total top news are:{range1}")
+    speak1(f"Todays top {range1} news headlines are")
+    for i in range(range1):
+        articles_index = all_articals[i]
+        article_title = articles_index["title"]
+        print(f"News number {i + 1}:- {article_title}")
+
+        speak1(f"News number {i+1} {article_title}")
+        time.sleep(1)
